@@ -1,3 +1,3 @@
 # 使用方法
 
-将lcd2img生成的c文件拖到simple_compress.exe上即可。
+将Image2Lcd生成的c文件拖到simple_compress.exe上即可。
