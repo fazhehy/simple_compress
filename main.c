@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
     unsigned short num = 0;
     char state = 0;
     unsigned short temp = 0;
-    unsigned short count = 0;
+    unsigned char count = 0;
     int len = 0;
     while (get_num(old_fp, &num)){
         if (state == 0){
@@ -116,16 +116,16 @@ int main(int argc, char* argv[])
         if (num == temp)
             count ++;
         else{
-            fprintf(new_fp, "0x%02x, 0x%02x, 0x%02x, 0x%02x, ", (temp>>8)&0xff, temp&0xff, (count>>8)&0xff, count&0xff);
+            fprintf(new_fp, "0x%02x, 0x%02x, 0x%02x, ", (temp>>8)&0xff, temp&0xff, count&0xff);
             temp = num;
             count = 1;
-            len += 4;
-            if (len % 16 == 0)
+            len += 3;
+            if (len % 15 == 0)
                 fprintf(new_fp, "\n\t");
         }
     }
-    fprintf(new_fp, "0x%02x, 0x%02x, 0x%02x, 0x%02x\n};\n", (temp>>8)&0xff, temp&0xff, (count>>8)&0xff, count&0xff);
-    len += 4;
+    fprintf(new_fp, "0x%02x, 0x%02x, 0x%02x\n};\n", (temp>>8)&0xff, temp&0xff, count&0xff);
+    len += 3;
     fclose(old_fp);
     fclose(new_fp);
 
